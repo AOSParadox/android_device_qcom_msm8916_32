@@ -30,24 +30,6 @@ $(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_BOOTLOADER_MODULE)
 droidcore: $(INSTALLED_BOOTLOADER_MODULE)
 endif
 
-ifneq ($(TARGET_DEVICE),jalebi)
-#----------------------------------------------------------------------
-# Compile Linux Kernel
-#----------------------------------------------------------------------
-ifeq ($(KERNEL_DEFCONFIG),)
-    ifeq ($(TARGET_BUILD_VARIANT),user)
-      KERNEL_DEFCONFIG := msm8916-perf_defconfig
-    else
-      KERNEL_DEFCONFIG := msm8916_defconfig
-    endif
-endif
-
-include kernel/AndroidKernel.mk
-
-$(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
-	$(transform-prebuilt-to-target)
-endif
-
 #----------------------------------------------------------------------
 # Copy additional target-specific files
 #----------------------------------------------------------------------
