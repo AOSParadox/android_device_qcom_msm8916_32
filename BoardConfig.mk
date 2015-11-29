@@ -22,7 +22,11 @@ TARGET_ARCH := arm
 endif
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
+ifneq ($(TARGET_DEVICE),jalebi)
+TARGET_KERNEL_APPEND_DTB := false
+else
 TARGET_KERNEL_APPEND_DTB := true
+endif
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(PWD)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-
 
 USE_CLANG_PLATFORM_BUILD := true
@@ -68,8 +72,11 @@ BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 endif # jalebi
 
+ifneq ($(TARGET_DEVICE),jalebi)
+TARGET_USES_UNCOMPRESSED_KERNEL := true
+else
 TARGET_USES_UNCOMPRESSED_KERNEL := false
-
+endif
 # Enables Adreno RS driver
 #OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
@@ -90,7 +97,9 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 
+ifneq ($(TARGET_DEVICE),jalebi)
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
+endif
 
 BOARD_EGL_CFG := device/qcom/msm8916_32/egl.cfg
 
