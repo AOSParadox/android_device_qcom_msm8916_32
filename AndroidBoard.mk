@@ -30,6 +30,7 @@ $(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_BOOTLOADER_MODULE)
 droidcore: $(INSTALLED_BOOTLOADER_MODULE)
 endif
 
+ifneq ($(TARGET_DEVICE),jalebi)
 #----------------------------------------------------------------------
 # Compile Linux Kernel
 #----------------------------------------------------------------------
@@ -45,6 +46,7 @@ include kernel/AndroidKernel.mk
 
 $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
 	$(transform-prebuilt-to-target)
+endif
 
 #----------------------------------------------------------------------
 # Copy additional target-specific files
