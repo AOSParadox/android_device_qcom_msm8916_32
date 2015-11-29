@@ -22,7 +22,7 @@ TARGET_ARCH := arm
 endif
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
-ifneq ($(TARGET_DEVICE),jalebi)
+ifeq ($(TARGET_DEVICE),jalebi)
 TARGET_KERNEL_APPEND_DTB := false
 else
 TARGET_KERNEL_APPEND_DTB := true
@@ -66,12 +66,8 @@ ifneq ($(TARGET_DEVICE),jalebi)
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 endif # jalebi
-
-ifneq ($(TARGET_DEVICE),jalebi)
-TARGET_USES_UNCOMPRESSED_KERNEL := true
-else
 TARGET_USES_UNCOMPRESSED_KERNEL := false
-endif
+
 # Enables Adreno RS driver
 #OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
