@@ -45,8 +45,9 @@ ifneq (,$(strip $(wildcard $(PRODUCT_RENDERING_ENGINE_REVLIB))))
 #   MULTI_LANG_ZAWGYI := REVERIE
 endif
 
-PRODUCT_BOOT_JARS += \
-           qcom.fmradio
+ifneq ($(PRODUCT_BRAND),YU) # We are using AOSP Radio packages
+PRODUCT_BOOT_JARS += qcom.fmradio
+endif
 
 PRODUCT_BOOT_JARS += tcmiface
 #PRODUCT_BOOT_JARS += qcmediaplayer
